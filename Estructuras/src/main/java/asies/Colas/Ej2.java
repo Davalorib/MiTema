@@ -1,4 +1,4 @@
-package asies.Ejercicios;
+package asies.Colas;
 
 import java.util.Scanner;
 import java.util.Stack;

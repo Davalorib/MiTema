@@ -1,4 +1,4 @@
-package asies.Colas;
+package asies.Pilas;
 
 import java.util.Deque;
 import java.util.LinkedList;

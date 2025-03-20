@@ -1,26 +1,27 @@
 package asies.Colas;
 
-import java.util.Stack;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Ej1 {
 
     public static void main(String[] args) {
 
-        Stack<String> pila = new Stack<>();
+        Queue<Character> cola = new LinkedList<>();
 
-        pila.push("a");
-        pila.push("e");
-        pila.push("i");
-        pila.push("o");
-        pila.push("u");
+        cola.offer('1');
+        cola.offer('2');
+        cola.offer('3');
+        cola.offer('4');
+        cola.offer('5');
 
-        System.out.println(pila.isEmpty());
-        System.out.println(pila.size());
-        System.out.println(pila.peek());
+        System.out.println(cola.isEmpty());
 
-        while(!pila.isEmpty()) {
-            System.out.println(pila.pop());
-        }
+        System.out.println(cola.size());
+
+        System.out.println(cola.peek());
+
+        while(!cola.isEmpty()) System.out.println(cola.poll());
 
     }
 

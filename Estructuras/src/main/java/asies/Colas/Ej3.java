@@ -1,32 +1,28 @@
 package asies.Colas;
 
-import java.util.Stack;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Ej3 {
 
     public static void main(String[] args) {
 
-        Stack<String> pila = new Stack<>();
+        Queue<String> playlist = new LinkedList<>();
 
-        String si = "((2+3)*(5-1))";
+        playlist.offer("El último día de nuestras vida - Dani Martín");
+        playlist.offer("Caminando por la vida - Melendi");
+        playlist.offer("Bulería - David Bibal");
+        playlist.offer("Rosas - La Oreja de Van Gogh");
 
-        for (String token : si.split("")) {
-            if (token.equals("(")) {
-                pila.push(token);
-            } else if (token.equals(")")) {
-                pila.push(token);
-                if (pila.contains("(")){
-                    pila.pop();
-                    pila.pop();
-                }
-            }
+        System.out.println("Estado inicial de la playlist: " + playlist);
+
+        while(!playlist.isEmpty()) {
+            System.out.println("Reproduciendo... " + playlist.poll());
+            System.out.println("Estado de la playlist después de reproducir la canción: " + playlist);
         }
 
-        if (pila.isEmpty()){
-            System.out.println("Ta bien");
-        } else {
-            System.out.println("Ta mal");
-        }
+        System.out.println("Fin");
 
     }
+
 }

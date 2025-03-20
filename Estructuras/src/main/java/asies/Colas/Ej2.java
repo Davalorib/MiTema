@@ -1,27 +1,28 @@
 package asies.Colas;
 
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Ej2 {
 
     public static void main(String[] args) {
 
-        Scanner ent = new Scanner(System.in);
+        Queue<String> cola = new LinkedList<>();
 
-        Stack<Integer> pila = new Stack<>();
+        cola.offer("Imprimir documento 1");
+        cola.offer("Imprimir documento 2");
+        cola.offer("Imprimir documento 3");
+        cola.offer("Imprimir documento 4");
+        cola.offer("Imprimir documento 5");
 
-        System.out.print("Introduce el primer número: ");
-        pila.push(ent.nextInt());
-        System.out.print("Introduce el segundo número: ");
-        pila.push(ent.nextInt());
-        System.out.print("Introduce el tercer número: ");
-        pila.push(ent.nextInt());
+        System.out.println("Estado inicial de la cola de impresión: " + cola);
 
-        System.out.println("Números en order inverso:");
-        while(!pila.isEmpty()) {
-            System.out.println(pila.pop());
+        while(!cola.isEmpty()) {
+            System.out.println("Procesando: " + cola.poll());
+            System.out.println("Estado de la cola después de procesar el tranajo: " + cola);
         }
+
+        System.out.println("Acabé");
 
     }
 

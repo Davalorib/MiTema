@@ -20,7 +20,10 @@ public class Ejercicio1 {
             mapa.put(p,mapa.getOrDefault(p,0)+1);
         }
 
-        System.out.println(mapa);
+        for (Map.Entry<String,Integer> palabra: mapa.entrySet()){
+            System.out.println(palabra.getKey() + ": " + palabra.getValue());
+        }
+
 
     }
 

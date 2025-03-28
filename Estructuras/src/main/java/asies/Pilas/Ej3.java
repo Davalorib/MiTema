@@ -4,29 +4,53 @@ import java.util.Stack;
 
 public class Ej3 {
 
-    public static void main(String[] args) {
+    static java.util.Scanner ent;
 
-        Stack<String> pila = new Stack<>();
+    public static boolean casoDePrueba() {
+        if (!ent.hasNext())
+            return false;
+        else {
+            Stack<String> pila = new Stack<>();
 
-        String si = "((2+3)*(5-1))";
+            String si = ent.nextLine();
 
-        for (String token : si.split("")) {
-            if (token.equals("(")) {
-                pila.push(token);
-            } else if (token.equals(")")) {
-                pila.push(token);
-                if (pila.contains("(")){
-                    pila.pop();
-                    pila.pop();
+            for (String token : si.split("")) {
+                if (token.equals("(") || token.equals("[") || token.equals("{")) {
+                    pila.push(token);
+                } else if (token.equals(")")) {
+                    pila.push(token);
+                    if (pila.contains("(")){
+                        pila.pop();
+                        pila.pop();
+                    }
+                }else if (token.equals("]")) {
+                    pila.push(token);
+                    if (pila.contains("[")){
+                        pila.pop();
+                        pila.pop();
+                    }
+                }else if (token.equals("}")) {
+                    pila.push(token);
+                    if (pila.contains("{")){
+                        pila.pop();
+                        pila.pop();
+                    }
                 }
             }
-        }
 
-        if (pila.isEmpty()){
-            System.out.println("Ta bien");
-        } else {
-            System.out.println("Ta mal");
+            if (pila.isEmpty()){
+                System.out.println("YES");
+            } else {
+                System.out.println("NO");
+            }
+            return true;
         }
-
     }
+
+    public static void main(String[] args) {
+        ent = new java.util.Scanner(System.in);
+        while (casoDePrueba()) {
+        }
+    }
+
 }

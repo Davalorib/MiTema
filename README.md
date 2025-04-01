@@ -21,11 +21,42 @@ El programa se divide en dos partes:
 - **App de Mantenimiento**.[en proceso]
 - **App Zona de Clientes** para autenticarse y realizar pedidos.
 
+
 ## Estructura de clases
-Utilizaremos Programación Orientada a Objetos (POO)
+
+Utilizaremos Programación Orientada a Objetos (POO) y la siguiente estructura:
+
+
+### DiagramaUNL
+![img/laimagen]()
+
+
+### Código de PlantUML
+````
+codigo platuml
+````
+
+
+### Clase Cliente
+````
+public class Arbitro {
+
+    List<String> lista = new ArrayList<>(Arrays.asList("Gil Manzano","Negreira","Pedro"));
+
+    public List<String> getLista() {
+
+        return Collections.unmodifiableList(lista);
+    }
+
+
+}
+````
+
 
 ## Programa principal AppZonaClientes
 
+
 ## Pruebas
+
 
 ## Entrega

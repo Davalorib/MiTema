@@ -1,4 +1,4 @@
-package asies.equals_hashcode;
+package asies.Equals_hashcode;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

@@ -2,7 +2,7 @@ package asies.Mercadaw;
 
 import lombok.Getter;
 
-import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -32,7 +32,7 @@ public class Cliente {
     }
 
     private void setUsuario() {
-        System.out.print("Dame tu usuario: ");
+        System.out.print("\nDame tu usuario: ");
         this.usuario = ent.next();
     }
 
@@ -42,6 +42,10 @@ public class Cliente {
             contra.append(CARACTERES.charAt(random.nextInt(CARACTERES.length())));
         }
         this.contrasenya = contra.toString();
+    }
+
+    public void setPromociones(){
+        this.promociones = true;
     }
 
     public void crearPedido(){
@@ -58,6 +62,22 @@ public class Cliente {
 
     public void verPedido(){
         pedido.verPedido();
+    }
+
+    public void verPedidoOrdenado(){
+        pedido.verPedidoOrdenado();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(usuario, cliente.usuario);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(usuario);
     }
 
     @Override

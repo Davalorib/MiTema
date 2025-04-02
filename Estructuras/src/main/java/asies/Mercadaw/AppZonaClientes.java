@@ -1,6 +1,5 @@
 package asies.Mercadaw;
 
-import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -11,11 +10,33 @@ public class AppZonaClientes {
 
     public static void main(String[] args) {
 
-        Mercadaw mercadaw = new Mercadaw();
-        Mercadaw.generarClientes();
-        autenticacion(Mercadaw.getClientes());
-        iniciarCompra();
-        cliente.verPedido();
+        boolean si;
+        new Mercadaw();
+        do {
+            si = false;
+            Mercadaw.generarClientes();
+            autenticacion(Mercadaw.getClientes());
+            try {
+                iniciarCompra();
+                cliente.verPedido();
+                menuElec();
+                System.out.print("\n¿Quieres volver a iniciar sesión? [S/N]: ");
+                switch (ent.next().toLowerCase()){
+                    case "s":
+                        si = true;
+                        break;
+                    case "n":
+                        System.out.println("\nPOR FAVOR VUELVA PRONTO");
+                        break;
+                    default:
+                        System.out.println("\nELECCIÓN NO VALIDA");
+                        System.err.println("\nABORTANDO PROGRAMA");
+                        break;
+                }
+            } catch (NullPointerException e) {
+                System.err.println("ABORTANDO PROGRAMA");
+            }
+        }while (si);
     }
 
     static void autenticacion(Set<Cliente> clientes){
@@ -56,7 +77,7 @@ public class AppZonaClientes {
                 Producto producto1 = Producto.valueOf(producto);
                 cliente.insertarProducto(producto1);
                 System.out.print("Has añadido "+ producto +" con un precio de "+ producto1.getPresio() +"€. Importe total del carrito: "
-                        + cliente.importePedido() +"€. ¿Quieres añadir más productos a tu carrito de la compra? [S/N]: ");
+                        + String.format("%.2f", cliente.importePedido()) +"€. ¿Quieres añadir más productos a tu carrito de la compra? [S/N]: ");
                 boolean repetir;
                 do {
                     repetir = false;
@@ -69,6 +90,7 @@ public class AppZonaClientes {
                         default:
                             System.out.print("Elige una opción válida [S/N]: ");
                             repetir = true;
+                            break;
                     }
                 } while (repetir);
             } catch (IllegalArgumentException e){
@@ -85,30 +107,46 @@ public class AppZonaClientes {
         }
     }
 
-    static void imprimirDespedida(){}
+    static void imprimirDespedida(){
+        System.out.println("\n=================================================\n");
+        System.out.println("GRACIAS POR SU PEDIDO. Se lo mandaremos a la dirección "+ cliente.getDireccion());
+    }
 
     static void menuElec(){
-        System.out.println("¿QUÉ DESEA HACER?");
+        System.out.println("¿QUÉ DESEA HACER?\n");
         System.out.println("        [1]. Aplicar promo.");
         System.out.println("        [2]. Mostrar resumen ordenado por uds.");
         System.out.println("        [3]. Terminar pedido.");
-
+        System.out.println("\n=================================================\n");
+        System.out.print("        Elige una opción: ");
         boolean repetir;
         do {
             repetir = false;
             switch (ent.next()) {
                 case "1":
-                    System.out.println("Aplicar promo.");
+                    System.out.println("\n=================================================\n");
+                    if (cliente.isPromociones()){
+                        System.out.println("YA HAS APLICADO TUS PROMOS.");
+                    }else{
+                        cliente.setPromociones();
+                        cliente.getPedido().aplicarPromo3x2();
+                        cliente.getPedido().aplicarPromo10();
+                        System.out.println("PROMO 3x2 y 10% APLICADAS.");
+                    }
+                    cliente.verPedido();
+                    menuElec();
                     break;
                 case "2":
-                    System.out.println("Mostrar resumen ordenado por uds.");
+                    cliente.verPedidoOrdenado();
+                    menuElec();
                     break;
                 case "3":
-                    System.out.println("Terminar pedido.");
+                    imprimirDespedida();
                     break;
                 default:
-                    System.out.print("Elige una opción válida [S/N]: ");
+                    System.out.print("        Elige una opción válida [1/2/3]: ");
                     repetir = true;
+                    break;
             }
         } while (repetir);
     }

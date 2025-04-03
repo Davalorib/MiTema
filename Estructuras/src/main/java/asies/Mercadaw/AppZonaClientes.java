@@ -18,7 +18,7 @@ public class AppZonaClientes {
             autenticacion(Mercadaw.getClientes());
             try {
                 iniciarCompra();
-                cliente.verPedido();
+                cliente.getPedido().verPedido();
                 menuElec();
                 System.out.print("\n¿Quieres volver a iniciar sesión? [S/N]: ");
                 switch (ent.next().toLowerCase()){
@@ -63,7 +63,7 @@ public class AppZonaClientes {
     }
 
     static void iniciarCompra(){
-        System.out.println("\nBIENVENID@ " + cliente.getUsuario() + "!\n");
+        System.out.println("\nBIENVENID@ " + cliente.getUsuario() + "!");
         cliente.crearPedido();
         boolean si;
         do {
@@ -101,7 +101,7 @@ public class AppZonaClientes {
     }
 
     static void imprimirProductos(){
-        System.out.println("Añade productos a tu lista de la compra...\n");
+        System.out.println("\nAñade productos a tu lista de la compra...\n");
         for (Producto p:Producto.values()) {
             System.out.println("        "+ p.name() +" precio ("+ p.getPresio() +"€)\n");
         }
@@ -116,13 +116,14 @@ public class AppZonaClientes {
         System.out.println("¿QUÉ DESEA HACER?\n");
         System.out.println("        [1]. Aplicar promo.");
         System.out.println("        [2]. Mostrar resumen ordenado por uds.");
-        System.out.println("        [3]. Terminar pedido.");
+        System.out.println("        [3]. Eliminar productos.");
+        System.out.println("        [X]. Terminar pedido.");
         System.out.println("\n=================================================\n");
         System.out.print("        Elige una opción: ");
         boolean repetir;
         do {
             repetir = false;
-            switch (ent.next()) {
+            switch (ent.next().toLowerCase()) {
                 case "1":
                     System.out.println("\n=================================================\n");
                     if (cliente.isPromociones()){
@@ -133,18 +134,42 @@ public class AppZonaClientes {
                         cliente.getPedido().aplicarPromo10();
                         System.out.println("PROMO 3x2 y 10% APLICADAS.");
                     }
-                    cliente.verPedido();
+                    cliente.getPedido().verPedido();
                     menuElec();
                     break;
                 case "2":
-                    cliente.verPedidoOrdenado();
+                    cliente.getPedido().verPedidoOrdenado();
                     menuElec();
                     break;
                 case "3":
+                    if (cliente.isPromociones()){
+                        System.out.println("\n=================================================\n");
+                        System.out.println("NO PUEDES QUITAR PRODUCTOS SI YA HAS APLICADO TUS PROMOS.\n");
+                    }else {
+                        cliente.getPedido().verPedido();
+                        boolean si2;
+                        do {
+                            si2 = false;
+                            System.out.print("        Introduce el producto a quitar: ");
+                            try {
+                                String producto = ent.next().toUpperCase();
+                                System.out.println("\n=================================================\n");
+                                cliente.getPedido().quitarProductos(Producto.valueOf(producto));
+                                cliente.getPedido().comprobar();
+                                cliente.getPedido().verPedido();
+                            } catch (IllegalArgumentException e) {
+                                System.out.println("El producto no existe! Elige otro.\n");
+                                si2 = true;
+                            }
+                        }while (si2);
+                    }
+                    menuElec();
+                    break;
+                case "x":
                     imprimirDespedida();
                     break;
                 default:
-                    System.out.print("        Elige una opción válida [1/2/3]: ");
+                    System.out.print("        Elige una opción válida [1/2/3/X]: ");
                     repetir = true;
                     break;
             }

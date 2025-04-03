@@ -60,14 +60,6 @@ public class Cliente {
         return pedido.getImporte_total();
     }
 
-    public void verPedido(){
-        pedido.verPedido();
-    }
-
-    public void verPedidoOrdenado(){
-        pedido.verPedidoOrdenado();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

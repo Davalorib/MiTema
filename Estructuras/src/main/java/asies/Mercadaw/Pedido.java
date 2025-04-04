@@ -24,6 +24,10 @@ public class Pedido {
         this.importe_total += p.getPresio();
     }
 
+    /**
+     * quita un producto dado por el usuario, preguntando la cantidad que desea quitar
+     * @param producto
+     */
     public void quitarProductos(Producto producto){
         System.out.print("Introduce la cantidad de "+ producto +" que quieres quitar: ");
         boolean si;
@@ -52,6 +56,9 @@ public class Pedido {
         System.out.println("\n=================================================\n");
     }
 
+    /**
+     * comprueba que no haya 0s y recalcula el precio, si hay lo quita del mapa
+     */
     public void comprobar(){
         double cantidad = 0;
         Producto fuera = null;
@@ -67,6 +74,9 @@ public class Pedido {
         this.importe_total = cantidad;
     }
 
+    /**
+     * muestra el pedido
+     */
     public void verPedido(){
         System.out.println("\n=================================================\n");
         System.out.println("RESUMEN DE TU CARRITO DE LA COMPRA:");
@@ -78,6 +88,9 @@ public class Pedido {
         System.out.println("\n=================================================\n");
     }
 
+    /**
+     * muestra el pedido ordenado
+     */
     public void verPedidoOrdenado(){
         System.out.println("\n=================================================\n");
         System.out.println("RESUMEN DE TU CARRITO DE LA COMPRA:");
@@ -91,6 +104,9 @@ public class Pedido {
         System.out.println("\n=================================================\n");
     }
 
+    /**
+     * aplica la promo 3x2
+     */
     public void aplicarPromo3x2(){
         double total = 0;
         for (Map.Entry<Producto,Integer> mapita:pedido.entrySet()) {
@@ -101,6 +117,9 @@ public class Pedido {
         this.importe_total = total;
     }
 
+    /**
+     * aplica el 10%
+     */
     public void aplicarPromo10(){
         this.importe_total *= ((100-DESCUENTO) / 100);
     }

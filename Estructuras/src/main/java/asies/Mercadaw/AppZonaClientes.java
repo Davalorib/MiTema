@@ -39,6 +39,10 @@ public class AppZonaClientes {
         }while (si);
     }
 
+    /**
+     * esta función autentica el usuario, dando 3 intentos al usuario
+     * @param clientes
+     */
     static void autenticacion(Set<Cliente> clientes){
         for (Cliente c:clientes){ System.out.println(c); }
         System.out.println("\n*** COMPRA ONLINE DE MERCADAW ***\n");
@@ -62,6 +66,9 @@ public class AppZonaClientes {
         }
     }
 
+    /**
+     * inicia la compra imprimiendo los productos disponibles y preguntando nuestra elección para añadir al pedido
+     */
     static void iniciarCompra(){
         System.out.println("\nBIENVENID@ " + cliente.getUsuario() + "!");
         cliente.crearPedido();
@@ -100,6 +107,9 @@ public class AppZonaClientes {
         }while (si);
     }
 
+    /**
+     * muestra los productos de nuestro pedido con sus precios
+     */
     static void imprimirProductos(){
         System.out.println("\nAñade productos a tu lista de la compra...\n");
         for (Producto p:Producto.values()) {
@@ -107,11 +117,17 @@ public class AppZonaClientes {
         }
     }
 
+    /**
+     * imprime la despedida
+     */
     static void imprimirDespedida(){
         System.out.println("\n=================================================\n");
         System.out.println("GRACIAS POR SU PEDIDO. Se lo mandaremos a la dirección "+ cliente.getDireccion());
     }
 
+    /**
+     * imprime el menu y nos pregunta la elección
+     */
     static void menuElec(){
         System.out.println("¿QUÉ DESEA HACER?\n");
         System.out.println("        [1]. Aplicar promo.");
@@ -175,5 +191,4 @@ public class AppZonaClientes {
             }
         } while (repetir);
     }
-
 }
